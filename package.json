@@ -7,8 +7,16 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^5.0.0",
     "express": "^4.16.2",
-    "mongoose": "^5.0.7"
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.7",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
@@ -19,7 +27,7 @@
       "URL",
       "fetch"
     ],
-     "parser": "babel-eslint"
+    "parser": "babel-eslint"
   },
   "license": "MIT"
 }

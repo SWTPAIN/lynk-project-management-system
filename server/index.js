@@ -1,13 +1,7 @@
-const mongoose = require('mongoose')
-const express = require('express')
+const config = require('./config')
+const app = require('./app')
 
-const app = express()
-const port = process.env.PORT || 5000
-
-mongoose.connect('mongodb://localhost/lynk_pms_dev')
-
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' })
+console.log('config', config)
+app.listen(config.port, function () {
+  console.log('Express server listening on port ' + config.port)
 })
-
-app.listen(port, () => console.log(`Listening on port ${port}`))
