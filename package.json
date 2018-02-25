@@ -7,9 +7,19 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mongoose": "^5.0.7"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.2",
     "concurrently": "^3.5.0"
-  }
+  },
+  "standard": {
+    "globals": [
+      "URL",
+      "fetch"
+    ],
+     "parser": "babel-eslint"
+  },
+  "license": "MIT"
 }
