@@ -12,9 +12,7 @@ module.exports = function (app) {
   const apiRoutes = express.Router()
   const authRoutes = express.Router()
 
-  //= ========================
   // Auth Routes
-  //= ========================
 
   // Set auth routes as subgroup/middleware to apiRoutes
   apiRoutes.use('/auth', authRoutes)

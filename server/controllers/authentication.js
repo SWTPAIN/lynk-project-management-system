@@ -15,9 +15,7 @@ function setUserInfo (request) {
   }
 }
 
-//= =======================================
 // Login Route
-//= =======================================
 exports.login = function (req, res, next) {
   let userInfo = setUserInfo(req.user)
 
@@ -27,9 +25,7 @@ exports.login = function (req, res, next) {
   })
 }
 
-//= =======================================
 // Registration Route
-//= =======================================
 exports.register = function (req, res, next) {
   // Check for registration errors
   const email = req.body.email
@@ -43,6 +39,15 @@ exports.register = function (req, res, next) {
   // Return error if no password provided
   if (!password) {
     return res.status(422).send({ error: 'You must enter a password.' })
+  }
+
+  // Return error if password is too short
+  if (password.length < 8) {
+    return res.status(422).send({ error: 'Password much be longer or equal to 8' })
+  }
+  // Return error if passowrd contain non letters or number
+  if (!/^[a-z0-9]+$/i.test(password)) {
+    return res.status(422).send({ error: 'Password can only contain letters and number' })
   }
 
   User.findOne({ email: email }, function (err, existingUser) {

@@ -1,14 +1,17 @@
 import { takeLatest, all } from 'redux-saga/effects'
 // ACTION TYPES
-import { actions } from '../modules/auth'
+import { actions as authActions } from '../modules/auth'
+import { actions as notificationActions } from '../modules/notification'
 
 // Sagas
 import { login, signup, logout } from './authSaga'
+import { showNotification } from './notificationSaga'
 
 export default function * rootSaga () {
   yield all([
-    takeLatest(actions.LOGIN_REQUEST, login),
-    takeLatest(actions.SIGNUP_REQUEST, signup),
-    takeLatest(actions.LOGOUT, logout)
+    takeLatest(authActions.LOGIN_REQUEST, login),
+    takeLatest(authActions.SIGNUP_REQUEST, signup),
+    takeLatest(authActions.LOGOUT, logout),
+    takeLatest(notificationActions.SHOW_NOTIFICATION, showNotification)
   ])
 }
