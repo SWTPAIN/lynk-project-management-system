@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const config = require('./config')
 
+mongoose.Promise = require('bluebird')
+
 mongoose.connect(config.database)
   .catch((err) => {
     console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err)

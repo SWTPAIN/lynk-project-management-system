@@ -7,6 +7,7 @@ import parseErrorMessage from '../../utils/parseErrorMessage'
 
 function * successfulAuthenticated (token) {
   window.localStorage.setItem('token', token)
+  axios.defaults.headers.common['Authorization'] = token
   yield put(push('/dashboard'))
 }
 

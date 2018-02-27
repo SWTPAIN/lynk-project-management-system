@@ -1,10 +1,12 @@
 import { takeLatest, all } from 'redux-saga/effects'
 // ACTION TYPES
 import { actions as authActions } from '../modules/auth'
+import { actions as projectActions } from '../modules/project'
 import { actions as notificationActions } from '../modules/notification'
 
 // Sagas
 import { login, signup, logout } from './authSaga'
+import { loadAll as loadAllProjects } from './projectSaga'
 import { showNotification } from './notificationSaga'
 
 export default function * rootSaga () {
@@ -12,6 +14,7 @@ export default function * rootSaga () {
     takeLatest(authActions.LOGIN_REQUEST, login),
     takeLatest(authActions.SIGNUP_REQUEST, signup),
     takeLatest(authActions.LOGOUT, logout),
-    takeLatest(notificationActions.SHOW_NOTIFICATION, showNotification)
+    takeLatest(notificationActions.SHOW_NOTIFICATION, showNotification),
+    takeLatest(projectActions.LOAD_ALL_REQUEST, loadAllProjects)
   ])
 }

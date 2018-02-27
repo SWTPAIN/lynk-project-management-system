@@ -2,13 +2,18 @@ import { createStore as createStore_, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
 import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 import rootSaga from './redux/sagas'
 import rootReducer from './redux/modules/rootReducer'
 import { hydrate } from './redux/modules/auth'
 
 const getHydratedUser = () => {
   try {
-    const {email} = jwtDecode(window.localStorage.getItem('token'))
+    const token = window.localStorage.getItem('token')
+    const {email} = jwtDecode(token)
+    // unexpected side effect
+    // TODO: move these logic to dedicated api client module
+    axios.defaults.headers.common['Authorization'] = token
     return {email}
   } catch (e) {
     window.localStorage.clear()
