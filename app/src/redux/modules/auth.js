@@ -6,6 +6,8 @@ const LOGIN_FAILURE = createAction('AUTH/LOGIN_FAILURE')
 const SIGNUP_REQUEST = createAction('AUTH/SIGNUP_REQUEST')
 const SIGNUP_SUCCESS = createAction('AUTH/SIGNUP_SUCCESS')
 const SIGNUP_FAILURE = createAction('AUTH/SIGNUP_FAILURE')
+const HYDRATE = createAction('/AUTH/HYDRATE')
+const LOGOUT = createAction('/AUTH/LOGOUT')
 
 export const actions = {
   LOGIN_REQUEST,
@@ -13,7 +15,8 @@ export const actions = {
   LOGIN_FAILURE,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
+  LOGOUT
 }
 
 const initialState = {
@@ -59,6 +62,8 @@ const signupFailureReducer = (state, action) => ({
   isLoading: false
 })
 
+const hydrateReducer = signupSuccessReducer
+
 // reducers
 export default function reducer (state = initialState, action) {
   switch (action.type) {
@@ -74,6 +79,8 @@ export default function reducer (state = initialState, action) {
       return signupSuccessReducer(state, action)
     case SIGNUP_FAILURE:
       return signupFailureReducer(state, action)
+    case HYDRATE:
+      return hydrateReducer(state, action)
     default:
       return state
   }
@@ -96,5 +103,18 @@ export const signupRequest = (email, password) => ({
   }
 })
 
+export const hydrate = user => ({
+  type: HYDRATE,
+  result: {
+    user
+  }
+})
+
+export const logout = () => ({
+  type: LOGOUT
+})
+
 // selectors
-export const projectsSelector = state => state.project.projects
+export const currentUserSelector = state =>
+  state.auth.user
+export const isAuthenticatedSelector = state => !!currentUserSelector(state)
