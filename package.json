@@ -1,10 +1,11 @@
 {
   "name": "lynk-project-management-system",
-  "version": "0.0.a",
+  "version": "0.0.1",
   "scripts": {
     "client": "cd app && yarn start",
     "server": "nodemon server",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "setup": "yarn; cd app; yarn; cd ..; yarn run db:reset",
     "db:reset": "node server/db/seed"
   },
   "dependencies": {
