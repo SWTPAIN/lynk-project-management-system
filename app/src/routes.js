@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import { compose, not } from 'ramda'
 import Dashboard from './containers/Dashboard'
+import ProjectDetail from './containers/ProjectDetail'
 import LogIn from './containers/LogIn'
 import SignUp from './containers/SignUp'
 import Navbar from './containers/Navbar'
@@ -42,6 +43,7 @@ export default ({history}) => {
           <VisitorOnlyRoute exact path='/' component={LogIn} />
           <VisitorOnlyRoute path='/signup' component={SignUp} />
           <AuthenticatedOnlyRoute path='/dashboard' component={Dashboard} />
+          <AuthenticatedOnlyRoute path='/project/:id' component={ProjectDetail} />
         </Switch>
       </div>
     </ConnectedRouter>

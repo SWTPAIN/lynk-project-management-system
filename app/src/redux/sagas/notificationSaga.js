@@ -5,4 +5,5 @@ export function * showNotification ({payload: {type, message}}) {
     pos: 'top-right',
     timeout: 3000
   })
+  yield
 }

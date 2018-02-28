@@ -6,7 +6,7 @@ import { actions as notificationActions } from '../modules/notification'
 
 // Sagas
 import { login, signup, logout } from './authSaga'
-import { loadAll as loadAllProjects } from './projectSaga'
+import { loadAll as loadAllProjects, updateOne } from './projectSaga'
 import { showNotification } from './notificationSaga'
 
 export default function * rootSaga () {
@@ -15,6 +15,7 @@ export default function * rootSaga () {
     takeLatest(authActions.SIGNUP_REQUEST, signup),
     takeLatest(authActions.LOGOUT, logout),
     takeLatest(notificationActions.SHOW_NOTIFICATION, showNotification),
-    takeLatest(projectActions.LOAD_ALL_REQUEST, loadAllProjects)
+    takeLatest(projectActions.LOAD_ALL_REQUEST, loadAllProjects),
+    takeLatest(projectActions.UPDATE_ONE_REQUEST, updateOne)
   ])
 }

@@ -15,7 +15,7 @@ class Navbar extends React.Component {
           <ul className='uk-navbar-nav'>
             <li>
               <NavLink to='/'>
-                <img className='logo' src='/logo.png' />
+                <img className='logo' src='/logo.png' alt='log' />
               </NavLink>
             </li>
             {
@@ -31,7 +31,7 @@ class Navbar extends React.Component {
             {
               currentUser &&
               <li>
-                <a href='#'>{currentUser.email}</a>
+                <a>{currentUser.email}</a>
                 <div className='uk-navbar-dropdown'>
                   <ul className='uk-nav uk-navbar-dropdown-nav'>
                     <li>

@@ -15,6 +15,46 @@ function ExpertList ({experts}) {
   )
 }
 
+function ProjectRow ({_id, title, status, createdAt, experts}) {
+  const projectUrl = `/project/${_id}`
+  return (
+    <tr>
+      <td className='uk-table-link'>
+        <Link
+          to={projectUrl}
+          className='uk-link-reset'
+        >
+          {title}
+        </Link>
+      </td>
+      <td>
+        <Link
+          to={projectUrl}
+          className='uk-link-reset'
+        >
+          {formatDate(createdAt)}
+        </Link>
+      </td>
+      <td>
+        <Link
+          to={projectUrl}
+          className='uk-link-reset'
+        >
+          {status}
+        </Link>
+      </td>
+      <td>
+        <Link
+          to={projectUrl}
+          className='uk-link-reset'
+        >
+          <ExpertList experts={experts} />
+        </Link>
+      </td>
+    </tr>
+  )
+}
+
 export default function ProjectTable ({title, projects}) {
   return (
     <div>
@@ -32,42 +72,9 @@ export default function ProjectTable ({title, projects}) {
         </thead>
         <tbody>
           {
-            projects.map(({title, status, createdAt, experts}) =>
+            projects.map(project =>
               (
-                <tr key={title}>
-                  <td className='uk-table-link'>
-                    <Link
-                      to={`/project/${title}`}
-                      className='uk-link-reset'
-                    >
-                      {title}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link
-                      to={`/project/${title}`}
-                      className='uk-link-reset'
-                    >
-                      {formatDate(createdAt)}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link
-                      to={`/project/${title}`}
-                      className='uk-link-reset'
-                    >
-                      {status}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link
-                      to={`/project/${title}`}
-                      className='uk-link-reset'
-                    >
-                      <ExpertList experts={experts} />
-                    </Link>
-                  </td>
-                </tr>
+                <ProjectRow key={project._id} {...project} />
               ))
           }
         </tbody>

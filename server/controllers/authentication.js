@@ -2,9 +2,10 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const config = require('../config')
 
+const TTL = 60 * 60 * 24 // 1 day in seconds
 function generateToken (user) {
   return jwt.sign(user, config.jwtSecret, {
-    expiresIn: 10080 // in seconds
+    expiresIn: TTL
   })
 }
 

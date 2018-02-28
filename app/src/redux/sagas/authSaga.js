@@ -13,7 +13,7 @@ function * successfulAuthenticated (token) {
 
 export function * login ({payload: {email, password}}) {
   try {
-    const {data: {user, token}} = yield axios.post(`api/auth/login`, { email, password })
+    const {data: {user, token}} = yield axios.post(`/api/auth/login`, { email, password })
     yield put({type: authActions.LOGIN_SUCCESS, result: {user}})
     yield * successfulAuthenticated(token)
   } catch (e) {
@@ -25,7 +25,7 @@ export function * login ({payload: {email, password}}) {
 
 export function * signup ({payload: {email, password}}) {
   try {
-    const {data: {user, token}} = yield axios.post(`api/auth/register`, { email, password })
+    const {data: {user, token}} = yield axios.post(`/api/auth/register`, { email, password })
     yield put({type: authActions.SIGNUP_SUCCESS, result: {user}})
     yield * successfulAuthenticated(token)
   } catch (e) {
