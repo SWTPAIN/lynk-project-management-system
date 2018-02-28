@@ -27,7 +27,7 @@ module.exports = function (app) {
   authRoutes.post('/login', requireLogin, AuthenticationController.login)
 
   // Project route
-  projectRoutes.get('/', requireAuth, ProjectController.getAll)
+  projectRoutes.get('/', ProjectController.getAll)
   projectRoutes.put('/:projectId', requireAuth, ProjectController.updateOne)
 
   // Set url for API group routes

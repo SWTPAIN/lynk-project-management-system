@@ -24,3 +24,4 @@ export const showNotification = (message, type) => ({
 })
 
 export const showErrorNotification = message => showNotification(message, 'danger')
+export const showSuccessNotification = message => showNotification(message, 'success')

@@ -43,7 +43,7 @@ export default ({history}) => {
           <VisitorOnlyRoute exact path='/' component={LogIn} />
           <VisitorOnlyRoute path='/signup' component={SignUp} />
           <AuthenticatedOnlyRoute path='/dashboard' component={Dashboard} />
-          <AuthenticatedOnlyRoute path='/project/:id' component={ProjectDetail} />
+          <Route path='/project/:id' component={ProjectDetail} />
         </Switch>
       </div>
     </ConnectedRouter>

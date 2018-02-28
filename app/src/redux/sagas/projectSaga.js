@@ -7,7 +7,7 @@ import {
   updateOneSuccess,
   updateOneFailure
 } from '../modules/project'
-import { showErrorNotification } from '../modules/notification'
+import { showErrorNotification, showSuccessNotification } from '../modules/notification'
 import parseErrorMessage from '../../utils/parseErrorMessage'
 
 const formatProject = project => (
@@ -34,8 +34,9 @@ export function * updateOne ({payload: {project}}) {
   try {
     const {data: {project: newProject}} = yield axios.put(`/api/projects/${project._id}`, {project})
     yield put(updateOneSuccess(formatProject(newProject)))
+    yield put(showSuccessNotification('Successfully update project.'))
   } catch (e) {
-    const errMsg = parseErrorMessage(e, 'Failed to update project')
+    const errMsg = parseErrorMessage(e, 'Failed to update project.')
     yield put(updateOneFailure(errMsg))
     yield put(showErrorNotification(errMsg))
   }
