@@ -18,21 +18,25 @@ class SignUp extends React.Component {
 
     return (
       <div>
-        Sign Up
+        <h1 className='uk-heading-primary uk-text-center'>
+          Sign Up
+        </h1>
+
         <AuthForm
           email={email}
           password={password}
           handleValueChange={this.handleFormValueChange}
           handleSubmit={this.handleFormSubmit}
           submitText='SignUp'
+          secondaryButton={
+            <Link
+              to='/'
+              className='uk-link-muted'
+            >
+              or go to login
+            </Link>
+          }
         />
-        <Link
-          to='/'
-          className='uk-link-muted'
-        >
-          Login
-        </Link>
-
       </div>
     )
   }

@@ -16,20 +16,24 @@ class LogIn extends React.Component {
     const { form: { email, password } } = this.state
     return (
       <div>
-        Login
+        <h1 className='uk-heading-primary uk-text-center'>
+          Login
+        </h1>
         <AuthForm
           email={email}
           password={password}
           handleValueChange={this.handleFormValueChange}
           handleSubmit={this.handleFormSubmit}
           submitText='Login'
+          secondaryButton={
+            <Link
+              to='/signup'
+              className='uk-link-muted'
+            >
+              or go to sign up
+            </Link>
+          }
         />
-        <Link
-          to='/signup'
-          className='uk-link-muted'
-        >
-          Sign Up
-        </Link>
       </div>
     )
   }

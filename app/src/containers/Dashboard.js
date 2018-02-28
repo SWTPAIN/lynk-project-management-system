@@ -23,10 +23,12 @@ class Dashboard extends React.Component {
           title='New Projects'
           projects={newProjects}
         />
+        <hr className='uk-margin-large' />
         <ProjectTable
           title='Finished Projects'
           projects={finishedProjects}
         />
+        <hr className='uk-margin-large' />
         <ProjectTable
           title='Expired Projects'
           projects={expiredProjects}

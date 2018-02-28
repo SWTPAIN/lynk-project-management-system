@@ -76,11 +76,17 @@ class ProjectDetail extends React.Component {
         <div>Loading</div>
       )
     }
-    console.log('project', project)
     const {title, status, experts, createdAt} = this.state.projectForm
+    const isExpired = isProjectExpired(this.state.projectForm)
     return (
       <div>
-        <div>{formatDate(createdAt)}</div>
+
+        <h1 className='uk-heading-primary'>
+          Project Detail
+        </h1>
+        <span className='uk-text-muted'>
+          {`(createdAt: ${formatDate(createdAt)})`}
+        </span>
         <form
           onSubmit={this.handleFormSubmit}
           className='uk-form-stacked'
@@ -96,10 +102,10 @@ class ProjectDetail extends React.Component {
           </div>
           <div className='uk-margin'>
             <label className='uk-form-label' htmlFor='form-stacked-text'>Status</label>
-            <div className='uk-form-controls'>
+            <div {...(isExpired ? {'uk-tooltip': 'You can not change expired project status'} : {})} className='uk-form-controls'>
               <Select
-                disabled={isProjectExpired(this.state.projectForm)}
-                value={status}
+                disabled={isExpired}
+                value={isExpired ? 'Expired' : status}
                 placeholder='status'
                 style={{ width: 500 }}
                 onChange={this.handleStatusChange}

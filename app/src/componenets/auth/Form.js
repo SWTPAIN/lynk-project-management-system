@@ -7,44 +7,49 @@ export default class AuthForm extends PureComponent {
   }
 
   render () {
-    const {email, password, submitText} = this.props
+    const {email, password, submitText, secondaryButton} = this.props
     const {passwordError} = this.state
     return (
-      <form onSubmit={this.handleSubmit} >
-        <div className='uk-margin'>
-          <div className='uk-inline'>
-            <span className='uk-form-icon' data-uk-icon='icon: user' />
-            <input
-              value={email}
-              name='email'
-              onChange={this.handleInputValueChange}
-              className='uk-input'
-              type='email'
-              required
-            />
+      <div className='uk-card uk-card-body  uk-card-default'>
+        <form onSubmit={this.handleSubmit} >
+          <div className='uk-margin'>
+            <div className='uk-inline'>
+              <span className='uk-form-icon' data-uk-icon='icon: user' />
+              <input
+                value={email}
+                name='email'
+                onChange={this.handleInputValueChange}
+                className='uk-input'
+                type='email'
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div className='uk-margin'>
-          <div className='uk-inline'>
-            <span className='uk-form-icon' data-uk-icon='icon: lock' />
-            <input
-              value={password}
-              name='password'
-              onChange={this.handleInputValueChange}
-              className={`uk-input ${passwordError && 'uk-form-danger'}`}
-              type='password'
-              minlengh={8}
-              required
-            />
+          <div className='uk-margin'>
+            <div className='uk-inline'>
+              <span className='uk-form-icon' data-uk-icon='icon: lock' />
+              <input
+                value={password}
+                name='password'
+                onChange={this.handleInputValueChange}
+                className={`uk-input ${passwordError && 'uk-form-danger'}`}
+                type='password'
+                minlengh={8}
+                required
+              />
+            </div>
+            <p>{passwordError}</p>
           </div>
-          <p>{passwordError}</p>
-        </div>
-        <input
-          type='submit'
-          className='uk-button uk-button-default'
-          value={submitText}
-        />
-      </form>
+          <input
+            type='submit'
+            className='uk-button uk-button-default'
+            value={submitText}
+          />
+        </form>
+        {
+          secondaryButton
+        }
+      </div>
     )
   }
 
@@ -79,6 +84,7 @@ export default class AuthForm extends PureComponent {
 AuthForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  secondaryButton: PropTypes.element.isRequired,
   handleValueChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   submitText: PropTypes.string.isRequired

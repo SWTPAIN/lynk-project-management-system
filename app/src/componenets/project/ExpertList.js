@@ -15,16 +15,22 @@ class ExpertItem extends PureComponent {
   render () {
     const {name, isApproved} = this.props.expert
     return (
-      <div>
-        <div>{name}</div>
-        <div onClick={this.handleDeleteClick}>delete</div>
-        <input
-          type='checkbox'
-          defaultChecked={isApproved}
-          value={isApproved}
-          onChange={this.handleValueChange}
-        />
-      </div>
+      <li>
+        <div>
+          {name}
+          <a uk-icon='close' onClick={this.handleDeleteClick} />
+        </div>
+        <label>
+          <input
+            type='checkbox'
+            className='uk-checkbox'
+            defaultChecked={isApproved}
+            value={isApproved}
+            onChange={this.handleValueChange}
+          />
+          Approved
+        </label>
+      </li>
     )
   }
 }
@@ -34,25 +40,31 @@ export default class ExpertList extends PureComponent {
     const {experts} = this.props
     return (
       <div>
-        <input
-          placeholder='New Expert Name'
-          ref={node => {
-            this.input = node
-          }} />
-        <button onClick={this.handleAddExpert}>
-              +
-        </button>
-        {
-          experts.map((expert, i) =>
-            <ExpertItem
-              key={expert.name + i}
-              index={i}
-              expert={expert}
-              handleIsApprovedChange={this.handleExpertIsApprovedChange}
-              handleDeleteItem={this.handleDeleteExpert}
-            />
-          )
-        }
+        <h3 className='uk-text-small'>
+          Experts
+        </h3>
+        <div className='uk-inline'>
+          <input
+            className='uk-input'
+            placeholder='New Expert Name'
+            ref={node => {
+              this.input = node
+            }} />
+        </div>
+        <a uk-icon='plus' onClick={this.handleAddExpert} />
+        <ul className='uk-list'>
+          {
+            experts.map((expert, i) =>
+              <ExpertItem
+                key={expert.name + i}
+                index={i}
+                expert={expert}
+                handleIsApprovedChange={this.handleExpertIsApprovedChange}
+                handleDeleteItem={this.handleDeleteExpert}
+              />
+            )
+          }
+        </ul>
       </div>
     )
   }

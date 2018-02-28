@@ -39,12 +39,16 @@ export default ({history}) => {
     <ConnectedRouter history={history}>
       <div>
         <Navbar to='/about'>About</Navbar>
-        <Switch>
-          <VisitorOnlyRoute exact path='/' component={LogIn} />
-          <VisitorOnlyRoute path='/signup' component={SignUp} />
-          <AuthenticatedOnlyRoute path='/dashboard' component={Dashboard} />
-          <Route path='/project/:id' component={ProjectDetail} />
-        </Switch>
+        <div className='uk-section uk-section-default'>
+          <div className='uk-container'>
+            <Switch>
+              <VisitorOnlyRoute exact path='/' component={LogIn} />
+              <VisitorOnlyRoute path='/signup' component={SignUp} />
+              <AuthenticatedOnlyRoute path='/dashboard' component={Dashboard} />
+              <Route path='/project/:id' component={ProjectDetail} />
+            </Switch>
+          </div>
+        </div>
       </div>
     </ConnectedRouter>
   )

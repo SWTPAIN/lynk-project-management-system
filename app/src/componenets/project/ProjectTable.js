@@ -4,6 +4,7 @@ import { compose, join, pluck } from 'ramda'
 import { Link } from 'react-router-dom'
 import {Project} from '../../propTypes'
 import formatDate from '../../utils/formatDate'
+import { getProjectStatus } from '../../redux/modules/project'
 
 const expertsToString = compose(join(', '), pluck('name'))
 
@@ -15,7 +16,8 @@ function ExpertList ({experts}) {
   )
 }
 
-function ProjectRow ({_id, title, status, createdAt, experts}) {
+function ProjectRow (project) {
+  const {_id, title, createdAt, experts} = project
   const projectUrl = `/project/${_id}`
   return (
     <tr>
@@ -40,7 +42,7 @@ function ProjectRow ({_id, title, status, createdAt, experts}) {
           to={projectUrl}
           className='uk-link-reset'
         >
-          {status}
+          {getProjectStatus(project)}
         </Link>
       </td>
       <td>
@@ -58,9 +60,9 @@ function ProjectRow ({_id, title, status, createdAt, experts}) {
 export default function ProjectTable ({title, projects}) {
   return (
     <div>
-      <h2 className='uk-heading-primary'>
+      <h3 className='uk-heading-primary'>
         {title}
-      </h2>
+      </h3>
       <table className='uk-table uk-table-divider uk-table-hover'>
         <thead>
           <tr>

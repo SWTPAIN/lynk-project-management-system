@@ -1,4 +1,6 @@
-import { compose, prop, filter, propEq, allPass, not, when, map, always, identity } from 'ramda'
+import {
+  compose, prop, filter, propEq, allPass, not, when, map, always,
+  cond } from 'ramda'
 import { createSelector } from 'reselect'
 import addDays from 'date-fns/add_days'
 import isBefore from 'date-fns/is_before'
@@ -53,7 +55,7 @@ const updateOneSuccessReducer = (state, action) => {
   const project = action.payload.project
   return ({
     ...state,
-    projects: map(when(propEq('id', project.id), always(project)), state.projects),
+    projects: map(when(propEq('_id', project.id), always(project)), state.projects),
     isLoading: false
   })
 }
@@ -119,11 +121,17 @@ export const projectsSelector = state => state.project.projects
 
 const threeDaysAgo = addDays(new Date(), -3)
 export const isProjectExpired = project => isBefore(prop('createdAt', project), threeDaysAgo)
-const isProjectStatusNew = propEq('status', 'new')
+export const isProjectNew = propEq('status', 'new')
+export const isProjectFinished = propEq('status', 'finished')
+export const getProjectStatus = cond([
+  [isProjectExpired, always('Expired')],
+  [isProjectFinished, always('Finished')],
+  [always(true), always('new')]
+])
 
-const filterFinishedProject = filter(propEq('status', 'finished'))
-const filterNewProject = filter(allPass([isProjectStatusNew, isProjectExpired]))
-const filterExpiredProject = filter(allPass([isProjectStatusNew, compose(not, isProjectExpired)]))
+const filterFinishedProject = filter(isProjectFinished)
+const filterExpiredProject = filter(allPass([isProjectNew, isProjectExpired]))
+const filterNewProject = filter(allPass([isProjectNew, compose(not, isProjectExpired)]))
 
 export const newProjectsSelector = createSelector(
   projectsSelector,
