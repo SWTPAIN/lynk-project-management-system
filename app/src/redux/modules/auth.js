@@ -33,7 +33,7 @@ const loginRequestReducer = (state, action) => ({
 
 const loginSuccessReducer = (state, action) => ({
   ...state,
-  user: action.result.user,
+  user: action.payload.user,
   errors: null,
   isLoading: false
 })
@@ -51,7 +51,7 @@ const signupRequestReducer = (state, action) => ({
 
 const signupSuccessReducer = (state, action) => ({
   ...state,
-  user: action.result.user,
+  user: action.payload.user,
   errors: null,
   isLoading: false
 })
@@ -105,13 +105,40 @@ export const signupRequest = (email, password) => ({
 
 export const hydrate = user => ({
   type: HYDRATE,
-  result: {
+  payload: {
     user
   }
 })
 
 export const logout = () => ({
   type: LOGOUT
+})
+
+export const loginSuccess = (user) => ({
+  type: LOGIN_SUCCESS,
+  payload: {
+    user
+  }
+})
+
+export const loginFailure = (error) => ({
+  type: LOGIN_FAILURE,
+  payload: {
+    error
+  }
+})
+export const signupSuccess = (user) => ({
+  type: SIGNUP_SUCCESS,
+  payload: {
+    user
+  }
+})
+
+export const signupFailure = (error) => ({
+  type: SIGNUP_FAILURE,
+  payload: {
+    error
+  }
 })
 
 // selectors

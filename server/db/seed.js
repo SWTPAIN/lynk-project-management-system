@@ -36,34 +36,45 @@ const createProjects = Project.create([
     ]
   },
   {
-    title: 'Cardano',
+    title: 'Ripple',
     status: 'new',
     experts: [
       {
-        name: 'Charles Hoskinson',
+        name: 'Alice',
         isApproved: true
       },
       {
-        name: 'Jeremy Wood',
+        name: 'Bob Wood',
         isApproved: true
       }
     ],
     createdAt: addDays(new Date(), -4)
   },
   {
-    title: 'Cardano',
+    title: 'Bitcoin',
     status: 'finished',
     experts: [
       {
-        name: 'Charles Hoskinson',
+        name: 'Joe',
         isApproved: true
       },
       {
-        name: 'Jeremy Wood',
+        name: 'Opol Wood',
+        isApproved: true
+      }
+    ]
+  },
+  {
+    title: 'EOS',
+    status: 'finished',
+    experts: [
+      {
+        name: 'Peter',
         isApproved: true
       }
     ]
   }
+
 ])
 
 // no finally for bluebird promise all inplementation
