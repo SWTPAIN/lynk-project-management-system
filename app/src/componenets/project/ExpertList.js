@@ -18,18 +18,18 @@ class ExpertItem extends PureComponent {
       <li>
         <div>
           {name}
-          <a uk-icon='close' onClick={this.handleDeleteClick} />
-        </div>
-        <label>
-          <input
-            type='checkbox'
-            className='uk-checkbox'
-            defaultChecked={isApproved}
-            value={isApproved}
-            onChange={this.handleValueChange}
-          />
+          <a uk-tooltip='title: Delte Expert' uk-icon='close' onClick={this.handleDeleteClick} />
+          <label>
+            <input
+              type='checkbox'
+              className='uk-checkbox'
+              defaultChecked={isApproved}
+              value={isApproved}
+              onChange={this.handleValueChange}
+            />
           Approved
-        </label>
+          </label>
+        </div>
       </li>
     )
   }
@@ -47,6 +47,7 @@ export default class ExpertList extends PureComponent {
           <input
             className='uk-input'
             placeholder='New Expert Name'
+            onKeyPress={this.handleKeyPress}
             ref={node => {
               this.input = node
             }} />
@@ -78,6 +79,12 @@ export default class ExpertList extends PureComponent {
       [...this.props.experts, {name: this.input.value, isApproved: false}]
     )
     this.input.value = ''
+  }
+
+  handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.handleAddExpert(e)
+    }
   }
 
   handleExpertIsApprovedChange = (index, isApproved) => {
